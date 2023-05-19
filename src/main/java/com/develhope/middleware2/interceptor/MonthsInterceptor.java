@@ -25,18 +25,16 @@ public class MonthsInterceptor implements HandlerInterceptor {
             new MonthsExerciseClass(6, "June", "Giugno", "Juni")
     );
 
-    private static final String INVALID_MONTH_NUMBER_ERROR = "Invalid monthNumber";
-
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String monthNumber = request.getHeader("monthNumber");
         if(monthNumber == null || monthNumber.isEmpty()){
-            response.sendError(HttpStatus.BAD_REQUEST.value(), INVALID_MONTH_NUMBER_ERROR);
+            response.sendError(HttpStatus.BAD_REQUEST.value());
             return false;
         }
 
         int monthNumberControl = Integer.parseInt(monthNumber);
         if(monthNumberControl <= 0 || monthNumberControl > monthList.size()) {
-            response.sendError(HttpStatus.BAD_REQUEST.value(), INVALID_MONTH_NUMBER_ERROR);
+            response.sendError(HttpStatus.BAD_REQUEST.value());
             return false;
         }
 
